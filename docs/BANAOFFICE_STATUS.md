@@ -43,17 +43,23 @@ This document separates inherited upstream capabilities from work that must be c
 
 ## Applications
 
+
 ### BanaWriter
+
 - [ ] Verify create, edit, save, reopen, print and export workflows.
 - [ ] Verify DOCX and ODT import/export round trips.
 - [ ] Add BanaOffice-specific usability improvements only with regression coverage.
 
+
 ### BanaSheets
+
 - [ ] Verify formulas, recalculation, charts, sorting, filtering and large workbooks.
 - [ ] Verify XLSX and ODS import/export round trips.
 - [ ] Add BanaOffice-specific usability improvements only with regression coverage.
 
+
 ### BanaSlides
+
 - [ ] Verify slide creation, layouts, themes, transitions, media and presenter workflows.
 - [ ] Verify PPTX and ODP import/export round trips.
 - [ ] Add BanaOffice-specific usability improvements only with regression coverage.
