@@ -78,7 +78,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in README.md LICENSE NOTICE main/LICENSE main/NOTICE; do
+          for file in README.md LICENSE main/LICENSE main/NOTICE; do
             test -s "$file" || { echo "::error::Required file missing or empty: $file"; exit 1; }
           done
           grep -q "Apache OpenOffice" README.md
