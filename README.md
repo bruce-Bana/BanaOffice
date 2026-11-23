@@ -17,55 +17,72 @@
  under the License.
 -->
 
-# Apache OpenOffice<sup>®</sup>
+# BanaOffice
 
-The Apache OpenOffice project (AOO) provides a full featured office productivity suite based on open standards.
-It is the continuation of the OpenOffice.org project.
+**BanaOffice is an independent office-suite project based on the Apache OpenOffice source code.**
 
-For detailed information about Apache OpenOffice please visit the [Project Website](https://openoffice.apache.org/).
+The goal is to develop a dependable, Windows-first productivity suite with three core applications:
 
-Apache OpenOffice is a very large project with many components and mainly implemented in C++ but also in Java, Perl, Python and other languages.
+- **BanaWriter** — word processing and document creation.
+- **BanaSheets** — spreadsheets, formulas, charts and data analysis.
+- **BanaSlides** — presentations and slide design.
 
-Currently supported platforms include:
+The current repository is a source fork of Apache OpenOffice. The upstream codebase is large and contains the existing office applications and shared platform libraries. BanaOffice-specific product work is being introduced incrementally; the presence of the upstream source does not mean that all BanaOffice branding, features, installers or release validation are complete.
 
-- Microsoft Windows
-- macOS (OS X)
-- Linux variants
-- FreeBSD
-- OS/2
+## Project status
 
-OpenOffice is used by millions of users worldwide and with more than 400 million downloads it is one of the most successful open source projects.
+| Area | Current state |
+| --- | --- |
+| Upstream source | Apache OpenOffice source fork on the `trunk` branch |
+| Licensing | Upstream license and NOTICE files retained |
+| Project identity | BanaOffice repository identity and project documentation |
+| Windows build research | Windows/MSVC build investigation documented in [win10-msvc](win10-msvc/README.md) |
+| Automated checks | Pre-commit workflow |
+| BanaWriter / BanaSheets / BanaSlides product rebrand | In progress; not yet complete |
+| Installer and signed releases | Not yet delivered |
+| Runtime and compatibility certification | Not yet completed |
 
-# Getting the latest sources via Git
+See [BanaOffice project status](docs/BANAOFFICE_STATUS.md) for the implementation roadmap and release gates.
 
-You can always checkout the latest source via Git using the following command:
+## Build from source
 
-```
-git clone https://gitbox.apache.org/repos/asf/openoffice.git aoo
-```
+BanaOffice inherits Apache OpenOffice's substantial native build system and third-party dependencies. A full build is not a lightweight single-command compilation and can take several hours after all platform prerequisites have been installed.
 
-For further information visit [https://openoffice.apache.org/source.html](https://openoffice.apache.org/source.html).
+Start with the upstream [Apache OpenOffice building guide](https://wiki.openoffice.org/wiki/Documentation/Building_Guide_AOO). The repository's Windows-specific investigation and known limitations are documented in [win10-msvc/README.md](win10-msvc/README.md).
 
-# Building Apache OpenOffice
+The general Unix-like build sequence from the upstream project is:
 
-Apache OpenOffice is a big project and depends on several other external libraries.\
-The list of prerequisites varies for the different platforms.
-
-A comprehensive and complete building guide can be found in the [Project Wiki](https://wiki.openoffice.org/wiki/Documentation/Building_Guide_AOO).
-
-With having all prerequisites in place you can simply run
-
-```
-cd aoo/main
+```sh
+cd main
 autoconf
 ./configure <configure_switches>
 ./bootstrap
-source *.Set.sh
+. ./*.Set.sh
 cd instsetoo_native
 build --all
 ```
 
-Note that building OpenOffice can take several hours.
+The exact configure options and prerequisites depend on the target operating system and toolchain. Do not treat a successful compile as proof that the generated applications install or run correctly; installation, startup, document round-trip and UNO/runtime tests are separate release gates.
 
-The default build will produce a setup version (e.g. setup program on Windows, dmg on macOS, rpm and deb packages on Linux) and an archived version.\
-The output can be found in the <output> directory in instsetoo_native/<output_dir>/Apache_OpenOffice/...
+## Development checks
+
+Install the small development-tool set and run the repository checks:
+
+```sh
+python -m pip install -r requirements-dev.txt
+pre-commit run --all-files
+```
+
+GitHub Actions runs these checks for pull requests and pushes to the default development branch.
+
+## Licensing and attribution
+
+BanaOffice is based on Apache OpenOffice. Existing source files, copyright notices, LICENSE files, NOTICE files and third-party attributions must be preserved. New and modified files must retain applicable notices. Third-party components may have additional license terms; consult the relevant component's license files before redistributing binaries.
+
+BanaOffice is an independent project and is not endorsed by or affiliated with the Apache Software Foundation. Apache, Apache OpenOffice and their respective logos are trademarks of the Apache Software Foundation. The BanaOffice name and branding do not change the licensing or attribution obligations of the inherited source.
+
+## Project links
+
+- [Source repository](https://github.com/bruce-Bana/BanaOffice)
+- [Apache OpenOffice upstream](https://github.com/apache/openoffice)
+- [Apache License 2.0](LICENSE)
