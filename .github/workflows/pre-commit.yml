@@ -56,6 +56,9 @@ jobs:
       - name: Run pre-commit on the complete source tree
         run: pre-commit run --color=always --all-files
 
+      - name: Run dependency-free website tests
+        run: python -m unittest discover -s tests/site -v
+
       - name: Verify required project and license files
         shell: bash
         run: |
