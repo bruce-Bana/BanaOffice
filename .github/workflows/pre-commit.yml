@@ -36,10 +36,25 @@ jobs:
     name: Source and metadata checks
     runs-on: ubuntu-24.04
     steps:
-      - name: Check out source
+      - name: Check out project metadata and website only
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            /*
+            !/*
+            /.github/
+            /docs/
+            /tests/site/
+            /README.md
+            /LICENSE
+            /NOTICE
+            /main/LICENSE
+            /main/NOTICE
+            /.pre-commit-config.yaml
+            /requirements-dev.txt
+          sparse-checkout-cone-mode: false
 
       - name: Set up Python
         uses: actions/setup-python@v6
