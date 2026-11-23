@@ -68,7 +68,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
 
-      - name: Run pre-commit on the complete source tree
+      - name: Run pre-commit on checked-out project metadata
         run: pre-commit run --color=always --all-files
 
       - name: Run dependency-free website tests
