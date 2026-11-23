@@ -21,8 +21,13 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
-      - name: Check out source
+      - name: Check out website files only
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: docs
+          sparse-checkout-cone-mode: true
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload website
