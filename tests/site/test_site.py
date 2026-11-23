@@ -57,7 +57,7 @@ class BanaOfficeWebsiteTests(unittest.TestCase):
 
     def test_navigation_anchors_resolve(self):
         for href in self.parser.links:
-            if href.startswith("#"):
+            if href.startswith("#") and href != "#":
                 with self.subTest(anchor=href):
                     self.assertIn(href[1:], self.parser.ids)
 
