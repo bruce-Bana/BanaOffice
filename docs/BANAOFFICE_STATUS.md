@@ -29,7 +29,7 @@ This document separates inherited upstream capabilities from work that must be c
 - [x] Add pull-request and push automation for development checks.
 - [x] Add a responsive project website under `docs/` and a GitHub Pages deployment workflow.
 - [x] Add dependency-free regression tests for the project website.
-- [ ] Enable GitHub Pages in repository settings and verify the first hosted deployment.
+- [x] Enable GitHub Pages in repository settings and complete the first hosted deployment.
 - [ ] Record a reproducible upstream commit baseline and a documented update policy.
 - [ ] Complete a component-by-component source, build and runtime audit.
 
