@@ -83,6 +83,7 @@ BanaOffice is an independent project and is not endorsed by or affiliated with t
 
 ## Project links
 
+- [BanaOffice website](https://bruce-bana.github.io/BanaOffice/)
 - [Source repository](https://github.com/bruce-Bana/BanaOffice)
 - [Apache OpenOffice upstream](https://github.com/apache/openoffice)
 - [Apache License 2.0](LICENSE)
