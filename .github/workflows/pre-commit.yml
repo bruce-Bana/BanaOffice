@@ -15,9 +15,14 @@
 # specific language governing permissions and limitations
 # under the License.
 
-name: pre-commit
+name: BanaOffice development checks
 
-on: [pull_request]
+on:
+  push:
+    branches:
+      - trunk
+  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,20 +33,36 @@ concurrency:
 
 jobs:
   pre-commit:
-    name: Run pre-commit
+    name: Source and metadata checks
     runs-on: ubuntu-24.04
     steps:
-      - name: Check Out
+      - name: Check out source
         uses: actions/checkout@v6
-      - name: Install
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install development tools
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
-      - name: Set PY
-        run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
-      - uses: actions/cache@v5
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
-      - name: Run pre-commit
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run pre-commit on the complete source tree
         run: pre-commit run --color=always --all-files
+
+      - name: Verify required project and license files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in README.md LICENSE NOTICE main/LICENSE main/NOTICE; do
+            test -s "$file" || { echo "::error::Required file missing or empty: $file"; exit 1; }
+          done
+          grep -q "Apache OpenOffice" README.md
+          grep -q "BanaOffice" README.md
+          grep -q "Apache License" LICENSE
